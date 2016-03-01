@@ -1,0 +1,3 @@
+[submodule "eacirc"]
+	path = eacirc
+	url = git@github.com:crocs-muni/EACirc.git
