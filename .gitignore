@@ -1,0 +1,5 @@
+# in case of in-tree build
+build*/
+
+# Generated Verison.h
+src/Version.h
