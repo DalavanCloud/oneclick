@@ -5,6 +5,8 @@ Currently Oneclick allows user to:
 * Generate scripts used for running of EACirc on remote server as well as scripts for download of results.
 * Post-process output of multiple EACirc runs, detect errors or inconsistencies and give final result of whole run.
 
+For more information and details see [project wiki pages](https://github.com/crocs-muni/oneclick/wiki).
+
 ## Guick Start Guide
 ### Linux
 ```
@@ -15,8 +17,6 @@ cd build
 ccmake ...
 make
 ```
-
-For more information and details see [project wiki pages](https://github.com/crocs-muni/oneclick/wiki).
 
 ## Authors
 The framework is developed at the [Centre for Research on Cryptography and Security (formerly Laboratory of Security and Applied Cryptography)](https://www.fi.muni.cz/research/crocs/), [Masaryk University](http://www.muni.cz/), Brno, Czech Republic.
