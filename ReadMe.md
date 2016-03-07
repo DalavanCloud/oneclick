@@ -14,9 +14,16 @@ git submodule init
 git submodule update
 mkdir build
 cd build
-ccmake ...
+ccmake ..
 make
 ```
+
+### Windows
+
+ * clone this repository using GitHub application
+ * run cmake-gui
+ * proceed as [usual](https://cmake.org/runningcmake)
+ * open the generated project in your Visual Studio
 
 ## Authors
 The framework is developed at the [Centre for Research on Cryptography and Security (formerly Laboratory of Security and Applied Cryptography)](https://www.fi.muni.cz/research/crocs/), [Masaryk University](http://www.muni.cz/), Brno, Czech Republic.
