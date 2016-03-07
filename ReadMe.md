@@ -5,6 +5,16 @@ Currently Oneclick allows user to:
 * Generate scripts used for running of EACirc on remote server as well as scripts for download of results.
 * Post-process output of multiple EACirc runs, detect errors or inconsistencies and give final result of whole run.
 
+## Guick Start Guide
+### Linux
+```
+git submodule init
+git submodule update
+mkdir build
+cd build
+ccmake ...
+make
+```
 
 For more information and details see [project wiki pages](https://github.com/crocs-muni/oneclick/wiki).
 
