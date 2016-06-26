@@ -23,30 +23,31 @@ void FileGenerator::generateFiles() {
     eacNode = getXMLElement(root , PATH_EACIRC);
 
     //Preparing variables for script handling
-    bool createWuFirstInsert = true;
-    bool downloadRemDirFirstInsert = true;
-    bool extractDeleteArchiveFirstInsert = true;
+    /* Temporarily commented out. Will be reworked soon :) */
+    //bool createWuFirstInsert = true;
+    //bool downloadRemDirFirstInsert = true;
+    //bool extractDeleteArchiveFirstInsert = true;
 
-    std::string uploadScriptSample = Utils::readFileToString((std::string)DIRECTORY_SCRIPT_SAMPLES + (std::string)FILE_SCRIPT_UPLOAD_SAMPLE);
-    oneclickLogger << FileLogger::LOG_INFO << "file " << FILE_SCRIPT_UPLOAD_SAMPLE << " was loaded into memory\n";
-    std::string downloadScriptSample = Utils::readFileToString((std::string)DIRECTORY_SCRIPT_SAMPLES + (std::string)FILE_SCRIPT_DOWNLOAD_SAMPLE);
-    oneclickLogger << FileLogger::LOG_INFO << "file " << FILE_SCRIPT_DOWNLOAD_SAMPLE << " was loaded into memory\n";
+    //std::string uploadScriptSample = Utils::readFileToString((std::string)DIRECTORY_SCRIPT_SAMPLES + (std::string)FILE_SCRIPT_UPLOAD_SAMPLE);
+    //oneclickLogger << FileLogger::LOG_INFO << "file " << FILE_SCRIPT_UPLOAD_SAMPLE << " was loaded into memory\n";
+    //std::string downloadScriptSample = Utils::readFileToString((std::string)DIRECTORY_SCRIPT_SAMPLES + (std::string)FILE_SCRIPT_DOWNLOAD_SAMPLE);
+    //oneclickLogger << FileLogger::LOG_INFO << "file " << FILE_SCRIPT_DOWNLOAD_SAMPLE << " was loaded into memory\n";
 
     //Fixing newlines
-    Utils::fixNewlines(uploadScriptSample);
-    Utils::fixNewlines(downloadScriptSample);
+    //Utils::fixNewlines(uploadScriptSample);
+    //Utils::fixNewlines(downloadScriptSample);
 
-    replaceInString(uploadScriptSample, KEYWORD_CLONES, Utils::itostr(clones));
-    replaceInString(uploadScriptSample, KEYWORD_PROJECT_ID, Utils::itostr(boincProjectID));
-    replaceInString(downloadScriptSample, KEYWORD_PROJECT_ID, Utils::itostr(boincProjectID));
+    //replaceInString(uploadScriptSample, KEYWORD_CLONES, Utils::itostr(clones));
+    //replaceInString(uploadScriptSample, KEYWORD_PROJECT_ID, Utils::itostr(boincProjectID));
+    //replaceInString(downloadScriptSample, KEYWORD_PROJECT_ID, Utils::itostr(boincProjectID));
 
-    std::string createWuMethodPrototype = getMethodPrototype(uploadScriptSample, KEYWORD_METHOD_CREATE_WU);
-    std::string downloadRemDirMethodPrototype = getMethodPrototype(downloadScriptSample, KEYWORD_METHOD_DOWNLOAD_REM_DIR);
-    std::string extractDeleteArchiveMethodPrototype = getMethodPrototype(downloadScriptSample, KEYWORD_METHOD_EXTRACT_DELETE_ARCHIVE);
+    //std::string createWuMethodPrototype = getMethodPrototype(uploadScriptSample, KEYWORD_METHOD_CREATE_WU);
+    //std::string downloadRemDirMethodPrototype = getMethodPrototype(downloadScriptSample, KEYWORD_METHOD_DOWNLOAD_REM_DIR);
+    //std::string extractDeleteArchiveMethodPrototype = getMethodPrototype(downloadScriptSample, KEYWORD_METHOD_EXTRACT_DELETE_ARCHIVE);
 
-    int uploadScriptPosition = uploadScriptSample.find(createWuMethodPrototype);
-    int downloadScriptPosition = min(downloadScriptSample.find(downloadRemDirMethodPrototype),
-        downloadScriptSample.find(extractDeleteArchiveMethodPrototype));
+    //int uploadScriptPosition = uploadScriptSample.find(createWuMethodPrototype);
+    //int downloadScriptPosition = min(downloadScriptSample.find(downloadRemDirMethodPrototype),
+    //    downloadScriptSample.find(extractDeleteArchiveMethodPrototype));
 
     //Variables declaration
     TiXmlNode * n = NULL;
@@ -93,31 +94,31 @@ void FileGenerator::generateFiles() {
         //Check for workunit name length
         if (wuName.length() <= BOINC_MAX_WU_NAME_LENGTH) {
             //Adding lines to upload and download script
-            createWuMethod = createWuMethodPrototype;
-            replaceInString(createWuMethod, KEYWORD_METHOD_CREATE_WU, DEFAULT_METHOD_CREATE_WU_NAME);
-            replaceInString(createWuMethod, KEYWORD_WU_NAME, wuName);
-            replaceInString(createWuMethod, KEYWORD_CONFIG_PATH, DIRECTORY_CFGS + configName);
+            //createWuMethod = createWuMethodPrototype;
+            //replaceInString(createWuMethod, KEYWORD_METHOD_CREATE_WU, DEFAULT_METHOD_CREATE_WU_NAME);
+            //replaceInString(createWuMethod, KEYWORD_WU_NAME, wuName);
+            //replaceInString(createWuMethod, KEYWORD_CONFIG_PATH, DIRECTORY_CFGS + configName);
 
-            uploadScriptPosition = insertIntoScript(uploadScriptSample, createWuMethodPrototype,
-                createWuMethod, uploadScriptPosition, createWuFirstInsert);
-            createWuFirstInsert = false;
+            //uploadScriptPosition = insertIntoScript(uploadScriptSample, createWuMethodPrototype,
+            //    createWuMethod, uploadScriptPosition, createWuFirstInsert);
+            //createWuFirstInsert = false;
 
-            downloadRemDirMethod = downloadRemDirMethodPrototype;
-            replaceInString(downloadRemDirMethod, KEYWORD_METHOD_DOWNLOAD_REM_DIR, DEFAULT_METHOD_DOWNLOAD_REM_DIR_NAME);
-            replaceInString(downloadRemDirMethod, KEYWORD_REM_DIR_NAME, wuName);
+            //downloadRemDirMethod = downloadRemDirMethodPrototype;
+            //replaceInString(downloadRemDirMethod, KEYWORD_METHOD_DOWNLOAD_REM_DIR, DEFAULT_METHOD_DOWNLOAD_REM_DIR_NAME);
+            //replaceInString(downloadRemDirMethod, KEYWORD_REM_DIR_NAME, wuName);
 
-            downloadScriptPosition = insertIntoScript(downloadScriptSample, downloadRemDirMethodPrototype,
-                downloadRemDirMethod, downloadScriptPosition, downloadRemDirFirstInsert);
-            downloadRemDirFirstInsert = false;
+            //downloadScriptPosition = insertIntoScript(downloadScriptSample, downloadRemDirMethodPrototype,
+            //    downloadRemDirMethod, downloadScriptPosition, downloadRemDirFirstInsert);
+            //downloadRemDirFirstInsert = false;
 
-            archiveName = wuName + ".zip";
-            extractDeleteArchiveMethod = extractDeleteArchiveMethodPrototype;
-            replaceInString(extractDeleteArchiveMethod, KEYWORD_METHOD_EXTRACT_DELETE_ARCHIVE, DEFAULT_METHOD_EXTRACT_DELETE_ARCHIVE_NAME);
-            replaceInString(extractDeleteArchiveMethod, KEYWORD_ARCHIVE_NAME, archiveName);
+            //archiveName = wuName + ".zip";
+            //extractDeleteArchiveMethod = extractDeleteArchiveMethodPrototype;
+            //replaceInString(extractDeleteArchiveMethod, KEYWORD_METHOD_EXTRACT_DELETE_ARCHIVE, DEFAULT_METHOD_EXTRACT_DELETE_ARCHIVE_NAME);
+            //replaceInString(extractDeleteArchiveMethod, KEYWORD_ARCHIVE_NAME, archiveName);
 
-            downloadScriptPosition = insertIntoScript(downloadScriptSample, extractDeleteArchiveMethodPrototype,
-                extractDeleteArchiveMethod, downloadScriptPosition, extractDeleteArchiveFirstInsert);
-            extractDeleteArchiveFirstInsert = false;
+            //downloadScriptPosition = insertIntoScript(downloadScriptSample, extractDeleteArchiveMethodPrototype,
+            //    extractDeleteArchiveMethod, downloadScriptPosition, extractDeleteArchiveFirstInsert);
+            //extractDeleteArchiveFirstInsert = false;
 
             if (wuID.length() > 0) {
                 notes.append(" [");
@@ -162,12 +163,12 @@ void FileGenerator::generateFiles() {
     downloadScriptName.append(FILE_SCRIPT_DOWNLOAD);
 
     //Saving upload and download script to file
-    Utils::saveStringToFile(uploadScriptName , uploadScriptSample);
-    oneclickLogger << FileLogger::LOG_INFO << "created file " << uploadScriptName << "\n";
-    uploadScriptSample.erase();
-    Utils::saveStringToFile(downloadScriptName , downloadScriptSample);
-    oneclickLogger << FileLogger::LOG_INFO << "created file " << downloadScriptName << "\n";
-    downloadScriptSample.erase();
+    //Utils::saveStringToFile(uploadScriptName , uploadScriptSample);
+    //oneclickLogger << FileLogger::LOG_INFO << "created file " << uploadScriptName << "\n";
+    //uploadScriptSample.erase();
+    //Utils::saveStringToFile(downloadScriptName , downloadScriptSample);
+    //oneclickLogger << FileLogger::LOG_INFO << "created file " << downloadScriptName << "\n";
+    //downloadScriptSample.erase();
 }
 
 std::string FileGenerator::getMethodPrototype(const std::string & source , const std::string & methodName) {
