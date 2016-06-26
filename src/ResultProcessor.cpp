@@ -14,9 +14,9 @@ ResultProcessor::ResultProcessor(std::string path , int pprocNum) {
 
     for (unsigned i = 0 ; i < dirPaths.size() ; i++) {
         //Creates directory logger. All directory specific info are logged here also.
-        FileLogger * dirLogger = new FileLogger(dirPaths[i] + "/batch.log");
-        oneclickLogger << FileLogger::LOG_INFO << "processing batch: " << Utils::getLastItemInPath(dirPaths[i]) << "\n";
-        *dirLogger << FileLogger::LOG_INFO << "processing batch: " << Utils::getLastItemInPath(dirPaths[i]) << "\n";
+        FileLogger * dirLogger = new FileLogger(dirPaths[i] + "/experiment.log");
+        oneclickLogger << FileLogger::LOG_INFO << "processing experiment: " << Utils::getLastItemInPath(dirPaths[i]) << "\n";
+        *dirLogger << FileLogger::LOG_INFO << "processing experiment: " << Utils::getLastItemInPath(dirPaths[i]) << "\n";
 
         //Getting paths to all logs and configs in subdirectories
         getFilePaths(dirPaths[i], configPaths, INDEX_CONFIG);
@@ -24,8 +24,8 @@ ResultProcessor::ResultProcessor(std::string path , int pprocNum) {
         getFilePaths(dirPaths[i], logPaths, INDEX_EACIRC);
         sortStrings(logPaths);
 
-        oneclickLogger << FileLogger::LOG_INFO << Utils::itostr(configPaths.size()) << " configs and " << Utils::itostr(logPaths.size()) << " logs in batch\n";
-        *dirLogger << FileLogger::LOG_INFO << Utils::itostr(configPaths.size()) << " configs and " << Utils::itostr(logPaths.size()) << " logs in batch\n";
+        oneclickLogger << FileLogger::LOG_INFO << Utils::itostr(configPaths.size()) << " configs and " << Utils::itostr(logPaths.size()) << " logs in experiment\n";
+        *dirLogger << FileLogger::LOG_INFO << Utils::itostr(configPaths.size()) << " configs and " << Utils::itostr(logPaths.size()) << " logs in experiment\n";
 
         //Check for config consistency, won't procceed otherwise
         oneclickLogger << FileLogger::LOG_INFO << "checking differences in configuration files\n";
@@ -42,13 +42,13 @@ ResultProcessor::ResultProcessor(std::string path , int pprocNum) {
             checkErrorsProcess(logPaths , dirLogger);
             pprocessor->calculateBatchResults();
 
-            oneclickLogger << FileLogger::LOG_INFO << "batch result: " << pprocessor->getLastScore().valToString() << "\n";
-            *dirLogger << FileLogger::LOG_INFO << "batch result: " << pprocessor->getLastScore().valToString() << "\n";
-            oneclickLogger << FileLogger::LOG_INFO << "batch processed\n\n";
-            *dirLogger << FileLogger::LOG_INFO << "batch processed\n\n";
+            oneclickLogger << FileLogger::LOG_INFO << "experiment result: " << pprocessor->getLastScore().valToString() << "\n";
+            *dirLogger << FileLogger::LOG_INFO << "experiment result: " << pprocessor->getLastScore().valToString() << "\n";
+            oneclickLogger << FileLogger::LOG_INFO << "experiment processed\n\n";
+            *dirLogger << FileLogger::LOG_INFO << "experiment processed\n\n";
         } else {
-            oneclickLogger << FileLogger::LOG_WARNING << "batch won't be processed. Remove invalid runs before processing!\n\n";
-            *dirLogger << FileLogger::LOG_WARNING << "batch won't be processed. Remove invalid runs before processing!\n\n";
+            oneclickLogger << FileLogger::LOG_WARNING << "experiment won't be processed. Remove invalid runs before processing!\n\n";
+            *dirLogger << FileLogger::LOG_WARNING << "experiment won't be processed. Remove invalid runs before processing!\n\n";
         }
 
         configPaths.clear();
@@ -75,19 +75,19 @@ bool ResultProcessor::checkConfigs(const std::vector<std::string> & configPaths,
         }
         currentConfig = Utils::readFileToString(configPaths[i]);
         if(sampleConfig.compare(currentConfig) != 0) {
-            oneclickLogger << FileLogger::LOG_WARNING << "config " << Utils::getLastItemInPath(configPaths[i]) << " differs from the first config in batch\n";
-            *dirLogger << FileLogger::LOG_WARNING << "config " << Utils::getLastItemInPath(configPaths[i]) << " differs from the first config in batch\n";
+            oneclickLogger << FileLogger::LOG_WARNING << "config " << Utils::getLastItemInPath(configPaths[i]) << " differs from the first config in experiment\n";
+            *dirLogger << FileLogger::LOG_WARNING << "config " << Utils::getLastItemInPath(configPaths[i]) << " differs from the first config in experiment\n";
             badConfigCount++;
         }
     }
 
     if(badConfigCount == 0) {
-        oneclickLogger << FileLogger::LOG_INFO << "no different configs in batch\n";
-        *dirLogger << FileLogger::LOG_INFO << "no different configs in batch\n";
+        oneclickLogger << FileLogger::LOG_INFO << "no different configs in experiment\n";
+        *dirLogger << FileLogger::LOG_INFO << "no different configs in experiment\n";
         return true;
     } else {
-        oneclickLogger << FileLogger::LOG_WARNING << Utils::itostr(badConfigCount) << " different configs in batch\n";
-        *dirLogger << FileLogger::LOG_WARNING << Utils::itostr(badConfigCount) << " different configs in batch\n";
+        oneclickLogger << FileLogger::LOG_WARNING << Utils::itostr(badConfigCount) << " different configs in experiment\n";
+        *dirLogger << FileLogger::LOG_WARNING << Utils::itostr(badConfigCount) << " different configs in experiment\n";
         return false;
     }
 }

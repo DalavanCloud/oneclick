@@ -57,7 +57,7 @@ public:
         result << jobCount;
         result << std::setw(10);
         result << std::left;
-        result << " jobs";
+        result << " runs";
 
         result << std::setprecision(6);
         result << std::fixed;
