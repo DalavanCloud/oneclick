@@ -11,7 +11,7 @@
 
 #include "OneclickConstants.h"
 
-/** Class for storing optins in configuration files to be generated.
+/** Class for storing options in configuration files to be generated.
   * Each object MUST have specified algorithm and algorithmRound attribute.
   * settings can be empty. Each Config object represents one configuration file.
   */

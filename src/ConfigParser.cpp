@@ -13,6 +13,7 @@ ConfigParser::ConfigParser(std::string path) {
 
     clones = getXMLValue(PATH_OC_CLONES);
     project = getXMLValue(PATH_EAC_PROJECT);
+
     setConfigs();
 
     oneclickLogger << FileLogger::LOG_INFO << "finished parsing config file\n";
